@@ -279,8 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287e28ebf7ddd284999a71356ca8e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto_move: 1
-  return_move: 1
   delay: 1
   move_x: -1500
   move_y: 0
@@ -1241,12 +1239,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 141157518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 287e28ebf7ddd284999a71356ca8e3c3, type: 3}
+  m_Script: {fileID: 11500000, guid: ec3a5c701b8ffcd4b9fe17c0d680645d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto_move: 0
-  return_move: 0
-  delay: 0
   move_x: 0
   move_y: 1340
 --- !u!1 &146234322
@@ -1302,8 +1297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287e28ebf7ddd284999a71356ca8e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto_move: 1
-  return_move: 1
   delay: 1.1
   move_x: -1500
   move_y: 0
@@ -3560,8 +3553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287e28ebf7ddd284999a71356ca8e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto_move: 1
-  return_move: 1
   delay: 0
   move_x: 0
   move_y: -800
@@ -9302,7 +9293,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 862529897}
@@ -11986,6 +11977,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 141157522}
+        m_MethodName: move_return
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1941485995
@@ -12171,8 +12173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287e28ebf7ddd284999a71356ca8e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto_move: 1
-  return_move: 1
   delay: 1.2
   move_x: -1500
   move_y: 0

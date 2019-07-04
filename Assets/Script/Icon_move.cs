@@ -13,11 +13,12 @@ public class Icon_move : MonoBehaviour
     public int num_max = 20;
     private int num;
 
-    private bool open = false;
+    private bool open;
 
     IEnumerator Start()
     {
         num = num_max;
+        open = false;
 
         transform.Translate(-move_x, -move_y, 0);
 
@@ -27,12 +28,12 @@ public class Icon_move : MonoBehaviour
 
             while (num != 0)
             {
-                transform.Translate(move_x / 20, move_y / 20, 0);
+                transform.Translate(move_x / num_max, move_y / num_max, 0);
                 num--;
 
                 yield return new WaitForSeconds(0.005f);
             }
-
+            num = num_max;
             open = true;
         }
     }

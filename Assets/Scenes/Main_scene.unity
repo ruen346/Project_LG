@@ -1262,7 +1262,6 @@ GameObject:
   - component: {fileID: 146234328}
   - component: {fileID: 146234327}
   - component: {fileID: 146234326}
-  - component: {fileID: 146234325}
   - component: {fileID: 146234324}
   m_Layer: 5
   m_Name: Bag_button
@@ -1307,18 +1306,6 @@ MonoBehaviour:
   move_x: -1500
   move_y: 0
   num_max: 20
---- !u!114 &146234325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146234322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156a53c8631edab439eadf507652fa67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &146234326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,7 +1358,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 146234325}
+      - m_Target: {fileID: 0}
         m_MethodName: start_game
         m_Mode: 1
         m_Arguments:
@@ -6821,8 +6808,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 141157522}
-        m_MethodName: move
+      - m_Target: {fileID: 1023316433}
+        m_MethodName: button_on
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12273,7 +12260,6 @@ GameObject:
   - component: {fileID: 1961487904}
   - component: {fileID: 1961487903}
   - component: {fileID: 1961487902}
-  - component: {fileID: 1961487901}
   - component: {fileID: 1961487900}
   - component: {fileID: 1961487906}
   m_Layer: 5
@@ -12319,18 +12305,6 @@ MonoBehaviour:
   move_x: -1500
   move_y: 0
   num_max: 20
---- !u!114 &1961487901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961487898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156a53c8631edab439eadf507652fa67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1961487902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12383,8 +12357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 141157522}
-        m_MethodName: move
+      - m_Target: {fileID: 1961487906}
+        m_MethodName: button_on
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Game_system : MonoBehaviour
 {
-    static int score = 0;
-    static int high_score = 0;
-    static int level = 1;
-    static bool sounds = true; // 사운드 온오프
-
-    static int game_play = 1;
+    static int score;
+    static int high_score;
+    static int level;
+    static bool sounds; // 사운드 온오프
+    static string windows; // 열린창 main/bag/achievement
+    static int game_play; // 게임 플레이 여부
 
 
     private void Awake()
@@ -23,15 +23,18 @@ public class Game_system : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+
+
+        score = 0;
+        high_score = PlayerPrefs.GetInt("high_score", 0);
+        level = 1;
+        sounds = true;
+        windows = "main";
+        game_play = 0;
     }
 
     IEnumerator Start()
     {
-        score = 0;
-        level = 1;
-        game_play = 0;
-        high_score = PlayerPrefs.GetInt("high_score", 0);
-
         while (true)
         {
             if(game_play == 1) 
@@ -73,10 +76,20 @@ public class Game_system : MonoBehaviour
         return sounds;
     }
 
+    public static string get_windows()
+    {
+        return windows;
+    }
+
     public static void set_sounds(bool on_sounds)
     {
         sounds = on_sounds;
         FindObjectOfType<Sound_control>().volume();
+    }
+
+    public static void set_windows(string on_windows)
+    {
+        windows = on_windows;
     }
 
     public static void level_up()

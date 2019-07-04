@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sound : MonoBehaviour
+public class Sound_button : MonoBehaviour
 {
     public Sprite sprite_off;
     public Sprite sprite_on;
@@ -19,12 +19,6 @@ public class Sound : MonoBehaviour
         {
             this.GetComponent<Image>().sprite = sprite_off;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void button_on()

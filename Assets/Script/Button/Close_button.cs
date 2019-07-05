@@ -8,9 +8,9 @@ public class Close_button : MonoBehaviour
     {
         if (Game_system.get_windows() == "main")
         {
-
+            Application.Quit();
         }
-        else if (Game_system.get_windows() == "achievement")
+        else if (Game_system.get_windows() == "achievement" && Game_system.get_icon_on() == true)
         {
             GameObject.Find("Achievement").GetComponent<Icon_move>().move();
 
@@ -20,6 +20,19 @@ public class Close_button : MonoBehaviour
             GameObject.Find("Bag_button").GetComponent<Icon_move>().move();
 
             Game_system.set_windows("main");
+            Game_system.set_icon_on(false);
+        }
+        else if (Game_system.get_windows() == "bag" && Game_system.get_icon_on() == true)
+        {
+            // GameObject.Find("Achievement").GetComponent<Icon_move>().move();
+
+            GameObject.Find("Logo").GetComponent<Icon_move>().move();
+            GameObject.Find("Start_button").GetComponent<Icon_move>().move();
+            GameObject.Find("Achievement_button").GetComponent<Icon_move>().move();
+            GameObject.Find("Bag_button").GetComponent<Icon_move>().move();
+
+            Game_system.set_windows("main");
+            Game_system.set_icon_on(false);
         }
     }
 }

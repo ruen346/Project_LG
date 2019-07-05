@@ -11,6 +11,7 @@ public class Game_system : MonoBehaviour
     static bool sounds; // 사운드 온오프
     static string windows; // 열린창 main/bag/achievement
     static int game_play; // 게임 플레이 여부
+    static bool icon_on; // 아이콘 이동중 false
 
 
     private void Awake()
@@ -31,19 +32,20 @@ public class Game_system : MonoBehaviour
         sounds = true;
         windows = "main";
         game_play = 0;
+        icon_on = false;
     }
 
     IEnumerator Start()
     {
         while (true)
         {
-            if(game_play == 1) 
+            if (game_play == 1)
                 score += 10;
 
             yield return new WaitForSeconds(0.5f);
         }
     }
-    
+
     public static void reset()
     {
         score = 0;
@@ -81,6 +83,11 @@ public class Game_system : MonoBehaviour
         return windows;
     }
 
+    public static bool get_icon_on()
+    {
+        return icon_on;
+    }
+
     public static void set_sounds(bool on_sounds)
     {
         sounds = on_sounds;
@@ -90,6 +97,11 @@ public class Game_system : MonoBehaviour
     public static void set_windows(string on_windows)
     {
         windows = on_windows;
+    }
+
+    public static void set_icon_on(bool on_icon_on)
+    {
+        icon_on = on_icon_on;
     }
 
     public static void level_up()

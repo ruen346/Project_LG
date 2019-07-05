@@ -35,6 +35,9 @@ public class Icon_move : MonoBehaviour
             }
             num = num_max;
             open = true;
+
+            if(this.gameObject.name == "Bag_button")
+                Game_system.set_icon_on(true);
         }
     }
 
@@ -69,5 +72,7 @@ public class Icon_move : MonoBehaviour
             num = num_max;
             open = false;
         }
+
+        Game_system.set_icon_on(true);
     }
 }

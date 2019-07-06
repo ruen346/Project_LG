@@ -9,6 +9,7 @@ public class Achievement_button : MonoBehaviour
         if (Game_system.get_windows() == "main" && Game_system.get_icon_on() == true)
         {
             GameObject.Find("Achievement").GetComponent<Icon_move>().move();
+            GameObject.Find("Achievement_logo").GetComponent<Icon_move>().move();
 
             GameObject.Find("Logo").GetComponent<Icon_move>().move();
             GameObject.Find("Start_button").GetComponent<Icon_move>().move();

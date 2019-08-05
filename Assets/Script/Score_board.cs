@@ -20,7 +20,7 @@ public class Score_board : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(transform.position.y > 0 + 540 && move_down == true)
+       if(transform.position.y > 720 && move_down == true)
             transform.Translate(0, -50, 0);
     }
 }

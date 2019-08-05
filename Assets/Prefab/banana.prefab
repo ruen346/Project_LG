@@ -119,11 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452dfeaeafcdbd84ba7089e3545e1530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   angle: 0
   destroy_time: 5
   turn_true: 0
   down_true: 0
   updown_true: 0
-  slide_back_true: 1
-  slide_front_true: 0

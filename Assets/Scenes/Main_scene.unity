@@ -195,9 +195,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2081653931}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.35
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4405,9 +4405,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 453154610}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.35
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5306,9 +5306,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 315137456}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.35
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5952,6 +5952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 721510895}
+  - component: {fileID: 721510896}
   m_Layer: 0
   m_Name: Achievement_box
   m_TagString: Untagged
@@ -5975,6 +5976,22 @@ Transform:
   m_Father: {fileID: 1268824486}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721510896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721510894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5d5bad43a4d2648904991606987880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievement_bar1: {fileID: 650739915}
+  achievement_bar2: {fileID: 8641603}
+  achievement_bar3: {fileID: 887787102}
+  achievement_bar4: {fileID: 536210342}
 --- !u!1 &722414436
 GameObject:
   m_ObjectHideFlags: 0
@@ -7616,9 +7633,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2109545350}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0.35
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

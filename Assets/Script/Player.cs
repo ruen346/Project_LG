@@ -1,25 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class Player : MonoBehaviour
 {
-    public float jump_power = 1;
+    public Slider jump_bar;
+
+    //public float jump_power = 1;
+    public float jump_charage = 6;
+    float collider_delay = 0; // 충돌시 무적 시간
 
     Collider2D this_collision;
 
     Rigidbody2D rigid;
+    SpriteRenderer render;
 
     Vector2 movement;
     bool jump = false;
 
-    float slide_delay = 0;
+    //float slide_delay = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collider_delay);
+        /*
         if (slide_delay == 0 && collision.tag == "Slide_back")
         {
             this_collision = collision;
             slide_delay = 10;    
+        }
+        */
+        if (collider_delay <= 0)
+        {
+            collider_delay = 2;
+            render.color = new Color(1, 1, 1, 0.5f);
+            StartCoroutine(Crash());
         }
     }
 
@@ -27,21 +43,18 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
+        render = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && transform.position.y <= -0.45 && (transform.rotation.z < 0.5 && transform.rotation.z > -0.5))
+        /* 과거의 유산
+        if (transform.position.y <= -0.45 && (transform.rotation.z < 0.5 && transform.rotation.z > -0.5))
             jump = true;
         if(transform.rotation.z > 0.5 || transform.rotation.z < -0.5)
         {
             transform.Translate(-3 * Time.deltaTime, 0, 0, Space.World);
-        }
-
-        if (transform.position.x < -4.5 && Game_system.get_play() == 1)
-        {
-            FindObjectOfType<Game_system>().game_end();
         }
 
         if(slide_delay != 0) // 미끄러짐
@@ -51,23 +64,66 @@ public class Player : MonoBehaviour
             this_collision.transform.Translate(-0.3f, 0, 0);
             slide_delay--;
         }
+        */
+        if (transform.position.y <= -0.69)
+        {
+            jump = true;
+        }
+        else
+        {
+            jump = false;
+        }
+
+        if (transform.position.x < -4.5 && Game_system.get_play() == 1)
+        {
+            FindObjectOfType<Game_system>().game_end();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            if (jump_charage < 12)
+            {
+                jump_charage += Time.deltaTime * 10;
+
+                if (jump_charage > 12)
+                    jump_charage = 12;
+
+                jump_bar.value = jump_charage;
+            }
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            if (jump)
+                Jump();
+
+            jump_charage = 6;
+            jump_bar.value = jump_charage;
+        }
     }
 
-    void FixedUpdate()
+    public void Jump()
     {
-        Jump();
-    }
-
-    void Jump()
-    {
-        if (!jump)
-            return;
-
         rigid.velocity = Vector2.zero;
 
-        Vector2 jumpVelocity = new Vector2(0, jump_power);
+        Vector2 jumpVelocity = new Vector2(0, jump_charage);
         rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
 
-        jump = false;
+        jump_bar.value = jump_charage;
+    }
+
+    IEnumerator Crash()
+    {
+        while (collider_delay > 0)
+        {
+            Debug.Log(collider_delay);
+
+            if(collider_delay > 1.7)
+                transform.Translate(-0.15f, 0, 0, Space.World);
+
+            collider_delay -= 0.05f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+        render.color = new Color(1, 1, 1, 1);
     }
 }

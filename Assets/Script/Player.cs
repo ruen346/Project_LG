@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         {
             if (jump_charage < 12)
             {
-                jump_charage += Time.deltaTime * 10;
+                jump_charage += Time.deltaTime * 20;
 
                 if (jump_charage > 12)
                     jump_charage = 12;

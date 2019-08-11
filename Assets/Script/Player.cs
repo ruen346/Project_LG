@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     Vector2 movement;
     bool jump = false;
 
+    Animator animator;
+
     //float slide_delay = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -99,6 +102,8 @@ public class Player : MonoBehaviour
             jump_charage = 6;
             jump_bar.value = jump_charage;
         }
+
+        animator.SetBool("Jump", jump);
     }
 
     public void Jump()

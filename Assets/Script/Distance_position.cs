@@ -1,25 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Distance_position : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Slider distance_bar;
+
     void Start()
     {
-            
+        StartCoroutine(Update_meter());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Update_meter()
     {
-        if(Game_system.get_play() == 1)
-            transform.Translate(3 * Time.deltaTime, 0, 0);
+        while (Game_system.get_play() == 1)
+        {
+            Game_system.set_meter(Game_system.get_meter() + 1);
 
-        if (transform.position.x > 22 && Game_system.get_level() == 1)
-            Game_system.level_up();
+            if (Game_system.get_meter() >= 120)
+                Game_system.level_up();
 
-        if (transform.position.x > 43 && Game_system.get_level() == 2)
-            Game_system.level_up();
+            if (Game_system.get_meter() >= 240)
+                Game_system.level_up();
+
+            distance_bar.value = Game_system.get_meter();
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

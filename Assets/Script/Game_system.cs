@@ -8,6 +8,7 @@ public class Game_system : MonoBehaviour
     static int score;
     static int high_score;
     static int level;
+    static int meter;
     static bool sounds; // 사운드 온오프
     static string windows; // 열린창 main/bag/achievement
     static int game_play; // 게임 플레이 여부
@@ -68,6 +69,11 @@ public class Game_system : MonoBehaviour
         return level;
     }
 
+    public static int get_meter()
+    {
+        return meter;
+    }
+
     public static int get_play()
     {
         return game_play;
@@ -86,6 +92,12 @@ public class Game_system : MonoBehaviour
     public static bool get_icon_on()
     {
         return icon_on;
+    }
+
+
+    public static void set_meter(int on_meter)
+    {
+        meter = on_meter;
     }
 
     public static void set_sounds(bool on_sounds)

@@ -6,18 +6,13 @@ using UnityEngine.UI;
 public class Text_manager : MonoBehaviour
 {
     public Text Score_text;
-    public Text End_Score_text;
+    public Text Score_end_text;
+    public Text Score_etc_text;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        Score_text.text = "Score : " + Game_system.get_score() + " ";
-        End_Score_text.text = "Score : " + Game_system.get_score() + "\nHigh Score : " + Game_system.get_high_score();
+        Score_text.text = string.Format("{0:#,##0}", Game_system.get_score());
+        Score_end_text.text = string.Format("{0:#,##0}", Game_system.get_score());
+        Score_etc_text.text = (int)Game_system.get_high_score() / 10 + "원\n\n최고기록 : " + string.Format("{0:#,##0}", Game_system.get_high_score());
     }
 }

@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
+
+        StartCoroutine(Move_back());
     }
 
     // Update is called once per frame
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
             slide_delay--;
         }
         */
-        if (transform.position.y <= -0.69)
+        if (transform.position.y <= -0.57)
         {
             jump = true;
         }
@@ -120,8 +122,6 @@ public class Player : MonoBehaviour
     {
         while (collider_delay > 0)
         {
-            Debug.Log(collider_delay);
-
             if(collider_delay > 1.7)
                 transform.Translate(-0.15f, 0, 0, Space.World);
 
@@ -130,5 +130,15 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
         render.color = new Color(1, 1, 1, 1);
+    }
+
+    IEnumerator Move_back()
+    {
+        while (Game_system.get_play() == 1)
+        {
+            transform.Translate(-0.005f, 0, 0, Space.World);
+
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }

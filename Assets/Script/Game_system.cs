@@ -30,6 +30,7 @@ public class Game_system : MonoBehaviour
         score = 0;
         high_score = PlayerPrefs.GetInt("high_score", 0);
         level = 1;
+        meter = 0;
         sounds = true;
         windows = "main";
         game_play = 0;
@@ -41,7 +42,7 @@ public class Game_system : MonoBehaviour
         while (true)
         {
             if (game_play == 1)
-                score += 10;
+                score += 100;
 
             yield return new WaitForSeconds(0.5f);
         }

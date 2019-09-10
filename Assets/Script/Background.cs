@@ -29,5 +29,13 @@ public class Background : MonoBehaviour
             if (transform.position.x < start)
                 transform.Translate(end, 0, 0);
         }
+        else
+        {
+            if (transform.position.x < -6)
+            {
+                GameObject.Find("Game_system").GetComponent<Spawner>().spawn_tile(gameObject.transform.position.x + 12);
+                Destroy(gameObject);
+            }
+        }
     }
 }

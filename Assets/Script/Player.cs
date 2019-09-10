@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public Slider jump_bar;
-
-    //public float jump_power = 1;
-    public float jump_charage = 6;
+    public float jump_power = 7; // 점프 강도
     float collider_delay = 0; // 충돌시 무적 시간
+    int max_hp;
+    int hp;
+
+    public int jump_num = 2; // 점프 가능 횟수
+    public bool attack = true;
 
     Collider2D this_collision;
 
@@ -17,23 +19,17 @@ public class Player : MonoBehaviour
     SpriteRenderer render;
 
     Vector2 movement;
-    bool jump = false;
 
     Animator animator;
+
+    public Slider hp_slider;
+    public GameObject attack_object;
 
     //float slide_delay = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collider_delay);
-        /*
-        if (slide_delay == 0 && collision.tag == "Slide_back")
-        {
-            this_collision = collision;
-            slide_delay = 10;    
-        }
-        */
-        if (collider_delay <= 0)
+        if (collider_delay <= 0 && attack_object.activeSelf == false)
         {
             collider_delay = 2;
             render.color = new Color(1, 1, 1, 0.5f);
@@ -41,93 +37,84 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Tile")
+        {
+            if (collision.collider.transform.position.y + 0.5f < transform.position.y)
+            {
+                jump_num = 2;
+                animator.SetBool("Jump", true);
+            }
+        }
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
 
+        max_hp = Game_system.get_max_hp();
+        hp_slider.maxValue = max_hp;
+        hp = max_hp;
+        hp_slider.value = hp;
+
         StartCoroutine(Move_back());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /* 과거의 유산
-        if (transform.position.y <= -0.45 && (transform.rotation.z < 0.5 && transform.rotation.z > -0.5))
-            jump = true;
-        if(transform.rotation.z > 0.5 || transform.rotation.z < -0.5)
-        {
-            transform.Translate(-3 * Time.deltaTime, 0, 0, Space.World);
-        }
-
-        if(slide_delay != 0) // 미끄러짐
-        {
-            transform.Rotate(0, 0, 3);
-            transform.Translate(-0.13f, 0.15f, 0, Space.World);
-            this_collision.transform.Translate(-0.3f, 0, 0);
-            slide_delay--;
-        }
-        */
-        if (transform.position.y <= -0.57)
-        {
-            jump = true;
-        }
-        else
-        {
-            jump = false;
-        }
-
-        if (transform.position.x < -4.5 && Game_system.get_play() == 1)
-        {
-            FindObjectOfType<Game_system>().game_end();
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            if (jump_charage < 12)
-            {
-                jump_charage += Time.deltaTime * 20;
-
-                if (jump_charage > 12)
-                    jump_charage = 12;
-
-                jump_bar.value = jump_charage;
-            }
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            if (jump)
-                Jump();
-
-            jump_charage = 6;
-            jump_bar.value = jump_charage;
-        }
-
-        animator.SetBool("Jump", jump);
     }
 
     public void Jump()
     {
-        rigid.velocity = Vector2.zero;
+        if (jump_num > 0)
+        {
+            rigid.velocity = Vector2.zero;
 
-        Vector2 jumpVelocity = new Vector2(0, jump_charage);
-        rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
+            Vector2 jumpVelocity = new Vector2(0, jump_power);
+            rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
 
-        jump_bar.value = jump_charage;
+            animator.SetBool("Jump", false);
+            jump_num--;
+        }
     }
+
+    public void Attack()
+    {
+        if (attack == true)
+        {
+            attack = false;
+            attack_object.SetActive(true);
+            StartCoroutine(Attack_delay());
+        }
+    }
+
+    IEnumerator Attack_delay()
+    {
+        for(int i=0; i<6; i++)
+        {
+            attack_object.transform.Rotate(Vector3.forward * -15);
+            yield return new WaitForSeconds(0.005f);
+        }
+        attack_object.SetActive(false);
+        attack_object.transform.Rotate(Vector3.forward * 90);
+
+        yield return new WaitForSeconds(0.5f);
+        attack = true;
+    }
+
 
     IEnumerator Crash()
     {
+        hp -= 20;
+        hp_slider.value = hp;
+
+        if (hp <= 0)
+            FindObjectOfType<Game_system>().game_end();
+
         while (collider_delay > 0)
         {
-            if(collider_delay > 1.7)
-                transform.Translate(-0.15f, 0, 0, Space.World);
+            collider_delay -= 0.1f;
 
-            collider_delay -= 0.05f;
-
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.01f);
         }
         render.color = new Color(1, 1, 1, 1);
     }
@@ -136,9 +123,16 @@ public class Player : MonoBehaviour
     {
         while (Game_system.get_play() == 1)
         {
-            transform.Translate(-0.005f, 0, 0, Space.World);
+            hp -= 1;
+            hp_slider.value = hp;
 
-            yield return new WaitForSeconds(0.05f);
+            if (hp <= 0)
+                FindObjectOfType<Game_system>().game_end();
+
+            if(gameObject.transform.position.y < -2.2f)
+                FindObjectOfType<Game_system>().game_end();
+
+            yield return new WaitForSeconds(1f);
         }
     }
 }

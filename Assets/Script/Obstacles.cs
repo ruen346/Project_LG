@@ -14,14 +14,17 @@ public class Obstacles : MonoBehaviour
     
     int updown_switch = 0;
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Game_system.set_score(Game_system.get_score() + 250);
+        Destroy(gameObject);
+    }
 
-    // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, destroy_time);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (turn_true)

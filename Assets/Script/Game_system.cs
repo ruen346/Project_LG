@@ -9,6 +9,7 @@ public class Game_system : MonoBehaviour
     static int high_score;
     static int level;
     static int meter;
+    static int max_hp;
     static bool sounds; // 사운드 온오프
     static string windows; // 열린창 main/bag/achievement
     static int game_play; // 게임 플레이 여부
@@ -31,6 +32,8 @@ public class Game_system : MonoBehaviour
         high_score = PlayerPrefs.GetInt("high_score", 0);
         level = 1;
         meter = 0;
+        max_hp = 100;
+
         sounds = true;
         windows = "main";
         game_play = 0;
@@ -52,6 +55,7 @@ public class Game_system : MonoBehaviour
     {
         score = 0;
         level = 0;
+        meter = 0;
         game_play = 1;
     }
 
@@ -75,6 +79,11 @@ public class Game_system : MonoBehaviour
         return meter;
     }
 
+    public static int get_max_hp()
+    {
+        return max_hp;
+    }
+
     public static int get_play()
     {
         return game_play;
@@ -95,6 +104,10 @@ public class Game_system : MonoBehaviour
         return icon_on;
     }
 
+    public static void set_score(int on_score)
+    {
+        score = on_score;
+    }
 
     public static void set_meter(int on_meter)
     {
@@ -133,11 +146,5 @@ public class Game_system : MonoBehaviour
         }
 
         FindObjectOfType<Score_board>().move();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Slide_back
   - System
+  - Attack
+  - Tile
   layers:
   - Default
   - TransparentFX
